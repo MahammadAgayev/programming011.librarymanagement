@@ -24,7 +24,6 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
                 Genre = (Genre)reader["genre"],
                 Title = (string)reader["title"]
             };
-
         }
 
         internal static Author MapAuthor(SqlDataReader reader)
