@@ -37,6 +37,17 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             };
         }
 
+        internal static User MapUser(SqlDataReader reader)
+        {
+            return new User
+            {
+                Id = (int)reader["id"],
+                Username = (string)reader["username"],
+                PasswordHash = (string)reader["passwordhash"],
+                Created = (DateTime)reader["created"]
+            };
+        }
+
         internal static AuthorBook MapAuthorBook(SqlDataReader reader)
         {
             return new AuthorBook

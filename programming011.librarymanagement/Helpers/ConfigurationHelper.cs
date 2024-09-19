@@ -8,7 +8,7 @@ namespace LibraryManagement.UI.Utils
 {
     internal static class ConfigurationHelper
     {
-        private static string _fileDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibraryManagement");
+        private static string _fileDirectory = "LibraryManagement"; //Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibraryManagement");
         private static string _filePath = Path.Join(_fileDirectory, "programming011.settings");
 
         private static ConfigurationInfo _configuration;

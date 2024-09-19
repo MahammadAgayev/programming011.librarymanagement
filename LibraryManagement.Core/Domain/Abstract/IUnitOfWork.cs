@@ -5,6 +5,7 @@
         IBookRepository BookRepository { get; }
         IAuthorRepository AuthorRepository { get; }
         IAuthorBookRepository AuthorBookRepository { get; }
+        IUserRepository UserRepository { get; }
 
         bool CheckConnection();
     }

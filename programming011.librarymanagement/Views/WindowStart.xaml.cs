@@ -36,8 +36,10 @@ namespace LibraryManagement.UI.Views
             });
         }
 
-        private void CheckServer()
+        private async void CheckServer()
         {
+            await Task.Delay(5000);
+
             if (ApplicationContext.UnitOfWork.CheckConnection())
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -56,8 +58,7 @@ namespace LibraryManagement.UI.Views
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ConfigurationWindow window = new ConfigurationWindow();
-                ConfigurationViewModel viewModel = new ConfigurationViewModel();
-                viewModel.Window = window;
+                ConfigurationViewModel viewModel = new ConfigurationViewModel(window);
                 window.DataContext = viewModel;
                 window.Show();
 

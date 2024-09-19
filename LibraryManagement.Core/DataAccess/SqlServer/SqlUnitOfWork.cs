@@ -17,6 +17,7 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
         public IAuthorRepository AuthorRepository => new SqlAuthorRepository(_connectionString);
 
         public IAuthorBookRepository AuthorBookRepository => throw new NotImplementedException();
+        public IUserRepository UserRepository => new SqlUserRepository(_connectionString);
 
         public bool CheckConnection()
         {

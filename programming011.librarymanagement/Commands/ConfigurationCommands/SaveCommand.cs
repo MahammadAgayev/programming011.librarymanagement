@@ -61,11 +61,11 @@ namespace LibraryManagement.UI.Commands.ConfigurationCommands
 
             ConfigurationHelper.Write(configuration);
 
-
             WindowStart windowStart = new WindowStart();
             windowStart.Show();
 
             _viewModel.Window.Close();
+
             /*
              * User should enter configuration data only once
              * 

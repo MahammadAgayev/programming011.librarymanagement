@@ -13,7 +13,6 @@ namespace LibraryManagement.UI.ViewModels
         {
             Configuration = new ConfigurationModel();
 
-            //TODO: add save cancel 
             Cancel = new CancelCommand(this);
             Save = new SaveCommand(this);
 
