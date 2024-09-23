@@ -7,7 +7,7 @@ using System.Windows.Media.Animation;
 
 namespace LibraryManagement.UI.ViewModels
 {
-    internal class LoginWindowViewModel : BaseWindowViewModel
+    public class LoginWindowViewModel : BaseWindowViewModel
     {
         public LoginWindowViewModel(Window window) : base(window)
         {
@@ -16,6 +16,7 @@ namespace LibraryManagement.UI.ViewModels
 
 
             Login = new LoginCommand(this);
+            OpenRegister = new OpenRegisterWindowCommand(this);
         }
 
         public LoginModel LoginModel { get; set; }
@@ -32,5 +33,6 @@ namespace LibraryManagement.UI.ViewModels
         }
 
         public ICommand Login { get; set; }
+        public ICommand OpenRegister { get; set; }
     }
 }

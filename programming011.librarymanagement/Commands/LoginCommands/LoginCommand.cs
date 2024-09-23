@@ -27,7 +27,6 @@ namespace LibraryManagement.UI.Commands.LoginCommands
         public void Execute(object parameter)
         {
             string username = _viewModel.LoginModel.Username;
-
             User user = ApplicationContext.UnitOfWork.UserRepository.GetByUsername(username);
 
             if(user == null)
@@ -41,7 +40,6 @@ namespace LibraryManagement.UI.Commands.LoginCommands
             string passwordHash = HashHelper.Hash(password);
             if(passwordHash == user.PasswordHash)
             {
-                //TODO: go to next page
                 MessageBox.Show("logged in");
                 _viewModel.Window.Close();
                 return;

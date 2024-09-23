@@ -18,7 +18,7 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
         {
             using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
 
-            const string query = @"insert into User(username, passwordhash, created)
+            const string query = @"insert into Users(username, passwordhash, created)
                                     values(@username, @passwordhash, @created)";
 
             SqlCommand cmd = new SqlCommand(query, connection);
