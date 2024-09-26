@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.Core.Domain.Entities;
 using LibraryManagement.UI.Helpers;
 using LibraryManagement.UI.ViewModels;
+using LibraryManagement.UI.Views;
 
 using System.Windows;
 using System.Windows.Controls;
@@ -40,7 +41,12 @@ namespace LibraryManagement.UI.Commands.LoginCommands
             string passwordHash = HashHelper.Hash(password);
             if(passwordHash == user.PasswordHash)
             {
-                MessageBox.Show("logged in");
+                AdminWindow adminWindow = new AdminWindow();
+                AdminWindowViewModel viewModel = new AdminWindowViewModel(adminWindow);
+                adminWindow.DataContext = viewModel;
+                //Something different from all pages
+                viewModel.CenterGrid = adminWindow.grdCenter;
+                adminWindow.Show();
                 _viewModel.Window.Close();
                 return;
             }

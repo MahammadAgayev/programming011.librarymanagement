@@ -31,7 +31,6 @@ namespace LibraryManagement.UI.Commands.ConfigurationCommands
         public void Execute(object? parameter)
         {
             string password = ((PasswordBox)parameter).Password;
-
             ConfigurationInfo configuration = new ConfigurationInfo
             {
                 ServerName = _viewModel.Configuration.ServerName,
@@ -60,10 +59,9 @@ namespace LibraryManagement.UI.Commands.ConfigurationCommands
             //string writtenText = File.ReadAllText(path);
 
             ConfigurationHelper.Write(configuration);
-
             WindowStart windowStart = new WindowStart();
-            windowStart.Show();
 
+            windowStart.Show();
             _viewModel.Window.Close();
 
             /*
