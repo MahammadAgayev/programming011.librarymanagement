@@ -1,16 +1,14 @@
 ﻿using LibraryManagement.UI.ViewModels;
 using LibraryManagement.UI.Views;
 
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagement.UI.Commands.AdminCommands
 {
-    public class OpenBooksCommand : ICommand
+    public class OpenAuthorsCommand : ICommand
     {
         private readonly AdminWindowViewModel _viewModel;
-
-        public OpenBooksCommand(AdminWindowViewModel viewModel)
+        public OpenAuthorsCommand(AdminWindowViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -26,11 +24,11 @@ namespace LibraryManagement.UI.Commands.AdminCommands
         {
             _viewModel.CenterGrid.Children.Clear();
 
-            UserControl booksUserControl = new BooksUserControl();
-            BooksViewModel booksViewModel = new BooksViewModel();
-            booksUserControl.DataContext = booksViewModel;
+            AuthorsUserControl userControl = new AuthorsUserControl();
+            AuthorsViewModel authorsViewModel = new AuthorsViewModel();
+            userControl.DataContext = authorsViewModel;
 
-            _viewModel.CenterGrid.Children.Add(booksUserControl);
+            _viewModel.CenterGrid.Children.Add(userControl);
         }
     }
 }

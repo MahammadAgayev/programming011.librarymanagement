@@ -6,14 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
-namespace LibraryManagement.UI.Commands.BooksCommands
+namespace LibraryManagement.UI.Commands.AuthorCommands
 {
-    public class OpenSaveBooksCommand : ICommand
+    internal class OpenSaveAuthorCommand : ICommand
     {
-        private readonly BooksViewModel _viewModel;
-        public OpenSaveBooksCommand(BooksViewModel viewModel)
+        private readonly AuthorsViewModel _viewModel;
+
+        public OpenSaveAuthorCommand(AuthorsViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -27,11 +29,12 @@ namespace LibraryManagement.UI.Commands.BooksCommands
 
         public void Execute(object parameter)
         {
-            SaveBookWindow window = new SaveBookWindow();
-            SaveBookViewModel viewModel = new SaveBookViewModel(window, _viewModel);
+            Window saveWindow = new SaveAuthorWindow();
+            SaveAuthorViewModel viewModel = new SaveAuthorViewModel(saveWindow, _viewModel);
 
-            window.DataContext = viewModel;
-            window.ShowDialog();
+            saveWindow.DataContext = viewModel;
+
+            saveWindow.ShowDialog();
         }
     }
 }

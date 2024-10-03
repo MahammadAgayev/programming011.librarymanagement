@@ -19,7 +19,8 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
 
             const string query = @"insert into books(Title, PageCount, PublishedDate, Genre)
-                         values(@title, @pageCount, @publishedDate, @genre";
+                         output inserted.id
+                         values(@title, @pageCount, @publishedDate, @genre)";
               
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("title", book.Title);
@@ -27,7 +28,9 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             cmd.Parameters.AddWithValue("publishedDate", book.PublishedDate);
             cmd.Parameters.AddWithValue("genre", book.Genre);
 
-            cmd.ExecuteNonQuery();
+            //cmd.ExecuteNonQuery();
+
+            book.Id = (int)cmd.ExecuteScalar();
         }
 
         public void Delete(int id)
@@ -77,6 +80,8 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             while (reader.Read())
             {
                 Book book = SqlMapper.MapBook(reader);
+
+                books.Add(book);
             }
 
             return books;

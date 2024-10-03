@@ -19,6 +19,7 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
 
             const string query = @"insert into authors(firstname, lastname,email)
+                               output inserted.id
                                values(@firstname, @lastname, @email)";
 
             SqlCommand cmd = new SqlCommand(query, connection);
@@ -27,7 +28,8 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             cmd.Parameters.AddWithValue("lastname", author.Lastname);
             cmd.Parameters.AddWithValue("email", author.Email);
 
-            cmd.ExecuteNonQuery();
+            author.Id = (int)cmd.ExecuteScalar();
+
         }
 
         public void Delete(int id)
@@ -86,7 +88,7 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
         {
             using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
 
-            const string query = @"update firstname=@firstname,lastname=@lastname, email=@email where id=@id";
+            const string query = @"update authors set firstname=@firstname,lastname=@lastname, email=@email where id=@id";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 

@@ -1,4 +1,5 @@
-﻿using LibraryManagement.UI.ViewModels;
+﻿using LibraryManagement.UI.Models;
+using LibraryManagement.UI.ViewModels;
 using LibraryManagement.UI.Views;
 
 using System;
@@ -10,10 +11,10 @@ using System.Windows.Input;
 
 namespace LibraryManagement.UI.Commands.BooksCommands
 {
-    public class OpenSaveBooksCommand : ICommand
+    public class OpenUpdateBookCommand : ICommand
     {
         private readonly BooksViewModel _viewModel;
-        public OpenSaveBooksCommand(BooksViewModel viewModel)
+        public OpenUpdateBookCommand(BooksViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -29,6 +30,9 @@ namespace LibraryManagement.UI.Commands.BooksCommands
         {
             SaveBookWindow window = new SaveBookWindow();
             SaveBookViewModel viewModel = new SaveBookViewModel(window, _viewModel);
+
+            BookModel model = _viewModel.BookModels[_viewModel.SelectedBookIndex];
+            viewModel.BookModel = model;
 
             window.DataContext = viewModel;
             window.ShowDialog();

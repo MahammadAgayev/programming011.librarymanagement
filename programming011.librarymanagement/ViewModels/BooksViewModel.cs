@@ -2,6 +2,7 @@
 using LibraryManagement.UI.Commands.BooksCommands;
 using LibraryManagement.UI.Models;
 
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace LibraryManagement.UI.ViewModels
@@ -11,7 +12,7 @@ namespace LibraryManagement.UI.ViewModels
         public BooksViewModel()
         {
             List<Book> books = ApplicationContext.UnitOfWork.BookRepository.GetAll();
-            BookModels = new List<BookModel>();
+            BookModels = new ObservableCollection<BookModel>();
 
             foreach(Book book in books)
             {
@@ -28,9 +29,14 @@ namespace LibraryManagement.UI.ViewModels
             }
 
             OpenSaveBook = new OpenSaveBooksCommand(this);
+            DeleteBook = new DeleteBookCommand(this);
+            OpenUpdateBook = new OpenUpdateBookCommand(this);
         }
 
-        public List<BookModel> BookModels { get; set; }
+        public ObservableCollection<BookModel> BookModels { get; set; }
         public ICommand OpenSaveBook { get; set; }
+        public ICommand DeleteBook { get; set; }
+        public ICommand OpenUpdateBook { get; set; }
+        public int SelectedBookIndex { get; set; }
     }
 }
