@@ -9,5 +9,10 @@ namespace LibraryManagement.UI.Models
         public Genre Genre { get; set; }
         public int PageCount { get; set; }
         public DateTime PublishedDate { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

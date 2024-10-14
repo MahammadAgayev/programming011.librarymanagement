@@ -16,5 +16,6 @@ namespace LibraryManagement.Core.Domain.Abstract
 
         List<AuthorBook> GetByAuthorId(int authorId);
         List<AuthorBook> GetByBookId(int bookId);
+        List<AuthorBook> GetAll();
     }
 }

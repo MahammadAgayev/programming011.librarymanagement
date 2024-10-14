@@ -18,13 +18,15 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
         {
             using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
 
-            const string query = "insert into authorbooks(bookid, authorid) values(@bookid,@authorid)";
-            SqlCommand cmd = new SqlCommand(query, connection);
+            const string query = @"insert into authorbooks(bookid, authorid) 
+                            output inserted.id
+                           values(@bookid,@authorid)";
 
+            SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("bookId", authorBook.Book.Id);
             cmd.Parameters.AddWithValue("authorId", authorBook.Author.Id);
 
-            cmd.ExecuteNonQuery();
+            authorBook.Id = (int)cmd.ExecuteScalar();
         }
 
         public void Delete(int id)
@@ -38,6 +40,41 @@ namespace LibraryManagement.Core.DataAccess.SqlServer
             cmd.Parameters.AddWithValue("id", id);
 
             cmd.ExecuteNonQuery();
+        }
+
+        public List<AuthorBook> GetAll()
+        {
+            using SqlConnection connection = ConnectionHelper.GetConnection(_connectionString);
+
+            const string query = @"
+select 
+ab.Id, 
+BookId,
+Title,
+PageCount,
+PublishedDate, 
+Genre,
+AuthorId,
+Firstname AuthorFirstname,
+Lastname AuthorLastname,
+Email AuthorEmail
+from AuthorBooks ab
+join Books b on b.Id = ab.BookId
+join Authors a on a.Id = ab.AuthorId
+";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<AuthorBook> authorBooks = new List<AuthorBook>();
+
+            while (reader.Read())
+            {
+                AuthorBook ab = SqlMapper.MapAuthorBook(reader);
+                authorBooks.Add(ab);
+            }
+
+            return authorBooks;
         }
 
         public List<AuthorBook> GetByAuthorId(int authorId)
